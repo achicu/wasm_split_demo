@@ -15,13 +15,13 @@
 using namespace std;
 
 // For things that are known to only be required on main.wasm, but they are not part of the callgraph of the main thread.
-#define MAIN_WASM     [[wasm::main]]
+#define MAIN_WASM     [[gnu::abi_tag("_MAIN_WASM_")]]
 
 // The symbol is only needed by the renderer thread.
-#define RENDERER_WASM [[wasm::split('renderer')]]
+#define RENDERER_WASM [[gnu::abi_tag("_RENDERER_WASM_")]]
 
 // The symbol is only needed by the renderer thread for editing purposes, expected to be loaded on-demand via wasm-split.
-#define EDITOR_WASM   [[wasm::split('editor')]]
+#define EDITOR_WASM   [[gnu::abi_tag("_EDITOR_WASM_")]]
 
 class core_application;
 
